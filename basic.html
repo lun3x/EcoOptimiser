@@ -79,6 +79,9 @@
           <h1>Information</h1>
       </div>
     <script>
+        function scrollTo() {
+            $('html, body').animate({ scrollTop: $('#page2').offset().top }, 'slow');
+        }
     var markers = [];
     var buttonStatus = [0,0,0]
     var map;
