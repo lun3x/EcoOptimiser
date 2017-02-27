@@ -20,7 +20,7 @@ function initTidePower(map, tideData) {
     }
 }
 
-function getBestLocations(tideData) {
+function getBestTidalLocations(tideData) {
     tideData.sort(function (a, b) {
         if (a[3] < b[3]) {
             return -1;
