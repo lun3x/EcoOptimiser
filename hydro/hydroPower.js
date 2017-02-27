@@ -5,14 +5,15 @@
 
 function getUpperQuartile(hydroData){
     hydroData.sort(function (a, b) {
-        if(a[6]>b[6]){
+        if (a[6] > b[6]){
             return 1;
         }
-        if(a[6]<b[6]){
+        if (a[6] < b[6]){
             return -1;
         }
         return 0;
     });
+    
     var upperQuartile = parseInt((hydroData.length+1)*0.97);
     var upperQuartData = hydroData.slice(upperQuartile, hydroData.length+1);
     
