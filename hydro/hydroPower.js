@@ -53,7 +53,7 @@ function getBestHydroLocations(hydroData) {
         return 0;
     });
     
-    var locData = hydroData.slice(0, 3);
+    var locData = hydroData.reverse().slice(0, 3);
     
     for (var i = 1; i < 4; i++) {
         document.getElementById("hydroLoc" + i).innerHTML = "River: " + locData[i-1][1] + " | Location: " + locData[i-1][2];
