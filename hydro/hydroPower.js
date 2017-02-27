@@ -35,19 +35,17 @@ function initHydroPower(map, hydroData){
         }
     }
     hydroData.sort(function (a, b) {
-        if (a[10] > b[10]) {
+        if (a[6] > b[6]) {
             return 1;
         }
-        if (a[10] < b[10]) {
+        if (a[6] < b[6]) {
             return -1;
         }
         return 0;
     });
     var locData = hydroData.slice(0,4);
-    alert(hydroData[0].length);
-    document.getElementById("hydroLoc1").innerHTML = "River: " + locData[0][1] + " | Location: " + locData[0][2]
-    for(var i=2;i<4;i++){
-        document.getElementById("hydroLoc"+i).innerHTML = "River: " + locData[i][1] + " | Location: " + locData[i][2];
+    for(var i=1;i<4;i++){
+        document.getElementById("hydroLoc"+i).innerHTML = "River: " + locData[i-1][1] + " | Location: " + locData[i-1][2];
         
     }
 }
