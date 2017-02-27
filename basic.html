@@ -7,6 +7,7 @@
     <script src="lib/jquery.csv.js"></script>
     <script src="wind/windPower.js" type="text/javascript"></script> 
     <script src="hydro/hydroPower.js" type="text/javascript"></script>
+    <script src="tidal/tidePower.js" type="text/javascript"></script>
     <script src="dataReading.js" type="text/javascript"></script> 
     <style>
       #map {
@@ -78,8 +79,6 @@
     <script>
      var windData = [];
       function initMap() {
-        
-        
         var hydroData = [];
         var uk = {lat: 54.000, lng: -2.5478};
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -90,11 +89,11 @@
         $(document).ready(function() {
             $.ajax({
                 type: "GET",
-                url: "http://localhost:8000/wind/WindSpeed.csv",
+                url: "http://localhost:8000/wind/windData.csv",
                 dataType: "text",
                 success: function(data) {
                     windData = processData(data);
-                    initWindPower(map,windData);
+                    initWindPower(map, windData);
                     getBestWindLocations(windData);
                 }
             });
@@ -104,7 +103,18 @@
                 dataType: "text",
                 success: function(data) {
                     hydroData = processData(data);
-                    initHydroPower(map,hydroData);
+                    initHydroPower(map, hydroData);
+                    getBestHydroLocations(hydroData)
+                }
+            });
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8000/tidal/tideData.csv",
+                dataType: "text",
+                success: function(data) {
+                    tideData = processData(data);
+                    initTidalPower(map, tideData);
+                    getBestTidalLocations(tideData);
                 }
             });
         });
