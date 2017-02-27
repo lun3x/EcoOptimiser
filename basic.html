@@ -52,25 +52,25 @@
                 <div style="display:none" id="enList0" class="w3-panel">
                     <ul class="w3-ul">
                         <li class="w3-green"><h4>Best Wind Locations</h4></li>
-                        <li class="w3-hover-green" id="windLoc1"></li>
-                        <li class="w3-hover-green" id="windLoc2" onclick="location.href='#info'"></li>
-                        <li id="windLoc3"></li>
+                        <li class="w3-hover-green" id="windLoc1" onclick="scrollTo('wind',1)"></li>
+                        <li class="w3-hover-green" id="windLoc2" onclick="scrollTo('wind',2)"></li>
+                        <li class="w3-hover-green" id="windLoc3" onclick="scrollTo('wind',3)"></li>
                     </ul>
                 </div>
                 <div style="display:none" id="enList1" class="w3-panel">
                     <ul class="w3-ul">
                         <li class="w3-blue"><h4>Best Hydro-Electric Locations</h4></li>
-                        <li id="hydroLoc1">Loc 1</li>
-                        <li id="hydroLoc2">Loc 2</li>
-                        <li id="hydroLoc3">Loc 3</li>
+                        <li class="w3-hover-blue" id="hydroLoc1" onclick="scrollTo('hydro',1)"></li>
+                        <li class="w3-hover-blue" id="hydroLoc2" onclick="scrollTo('hydro',2)"></li>
+                        <li class="w3-hover-blue" id="hydroLoc3" onclick="scrollTo('hydro',3)"></li>
                     </ul>
                 </div>
                 <div style="display:none" id="enList2" class="w3-panel">
                     <ul class="w3-ul">
                         <li class="w3-grey"><h4>Best Tidal Locations</h4></li>
-                        <li id="tidalLoc1">Loc 1</li>
-                        <li id="tidalLoc2">Loc 2</li>
-                        <li id="tidalLoc3">Loc 3</li>
+                        <li class="w3-hover-grey" id="tidalLoc1" onclick="scrollTo('tidal',1)"></li>
+                        <li class="w3-hover-grey" id="tidalLoc2" onclick="scrollTo('tidal',2)"></li>
+                        <li class="w3-hover-grey" id="tidalLoc3" onclick="scrollTo('tidal',3)"></li>
                     </ul>
                 </div>
             </div>
@@ -155,6 +155,13 @@ function setMapOnAll(map,markers) {
     for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(map);
     }
+}
+
+function scrollTo(enType,enNum){
+    $('html, body').animate({
+            scrollTop: $("#page2").offset().top
+    }, 2000);
+    var placeName = document.getElementById(enType+"Loc"+enNum).innerHTML;
 }
     </script>
     <script async defer
