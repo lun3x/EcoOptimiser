@@ -27,16 +27,12 @@
                 dataType: "text",
                 success: function(data) {
                     windData = processData(data);
-                    var uluru = {lat: -25.363, lng: 131.044};
+                    var uk = {lat: 54.000, lng: -2.5478};
                     var map = new google.maps.Map(document.getElementById('map'), {
-                        zoom: 4,
-                        center: uluru
+                        zoom: 5,
+                        center: uk
                     });
-                    var marker = new google.maps.Marker({
-                        position: uluru,
-                        map: map
-                    });
-                    console.log(windData);
+                    initWindPower(map,windData);
                 }
             });
         });
