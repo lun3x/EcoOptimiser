@@ -11,17 +11,27 @@
     <script src="dataReading.js" type="text/javascript"></script> 
     <style>
       #map {
-        height: 600px;
+        height: 100%;
         width: 70%;
-       }
+      }
+      #mapandbest {
+        height: 80%;
+      }
+      #page1 {
+        height: 100vh;
+      }
+        #page2 {
+            height: 100vh;
+        }
     </style>
   </head>
   <body>
+      <div id="page1" class="w3-panel">
         <div class="w3-panel">
             <h1>EcoOptimiser</h1>
             <h2>Finding the optimal locations for renewable energy</h2>
         </div>
-        <div class="w3-cell-row">
+        <div id="mapandbest" class="w3-cell-row">
             <div id="map" class="w3-cell w3-panel w3-border"></div>
             <div class="w3-cell w3-panel w3-border">
                 <h3>Optimal Locations for:</h3>
@@ -63,12 +73,16 @@
                     </ul>
                 </div>
             </div>
-            </div>
+        </div>
+      </div>
+      <div id="page2" class="w3-panel">
+          <h1>Information</h1>
+      </div>
     <script>
      var windData = [];
       function initMap() {
         var hydroData = [];
-        var uk = {lat: 54.000, lng: -2.5478};
+        var uk = {lat: 56.000, lng: -2.5478};
         var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 5,
                 center: uk
@@ -108,15 +122,17 @@
         });
 
       }
-    var buttonStatus = [0,0,0]
-    function loadList(enType){
-        if(enType=="Wind"){
+        
+    var buttonStatus = [0,0,0];
+        
+    function loadList(enType) {
+        if (enType == "Wind"){
             changeButton(0,"green");
         }
-        else if(enType=="Hydro"){
+        else if (enType=="Hydro") {
             changeButton(1,"blue");
         }
-        else if(enType=="Tidal"){
+        else if (enType=="Tidal") {
             changeButton(2,"grey");
         }            
     }
