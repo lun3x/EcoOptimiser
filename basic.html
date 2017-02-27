@@ -89,7 +89,7 @@
         $(document).ready(function() {
             $.ajax({
                 type: "GET",
-                url: "http://localhost:8000/wind/WindSpeed.csv",
+                url: "http://localhost:8000/wind/windData.csv",
                 dataType: "text",
                 success: function(data) {
                     windData = processData(data);
@@ -104,11 +104,12 @@
                 success: function(data) {
                     hydroData = processData(data);
                     initHydroPower(map, hydroData);
+                    getBestHydroLocations(hydroData)
                 }
             });
             $.ajax({
                 type: "GET",
-                url: "http://localhost:8000/tidal/tideHeight.csv",
+                url: "http://localhost:8000/tidal/tideData.csv",
                 dataType: "text",
                 success: function(data) {
                     tideData = processData(data);

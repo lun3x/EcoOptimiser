@@ -1,8 +1,10 @@
 "use strict"
+
 function initWindPower(map, windData) {
     for (var i = 0; i < windData.length; i++) { 
-        if(parseFloat(windData[i][15]) > 5.7){
+        if (parseFloat(windData[i][15]) > 5.7) {
             var positionM = {lat: parseFloat(windData[i][1]), lng: parseFloat(windData[i][2])};
+            
             var marker = new google.maps.Marker({
                 position: positionM,
                 map: map,
@@ -28,9 +30,10 @@ function getBestWindLocations(windData) {
         }
         return 0;
     }).reverse();
+    
     var locData = windData.slice(0,3);
-    for(var i=1;i<4;i++){
-        document.getElementById("windLoc"+i).innerHTML = locData[i-1][0];
+    for (var i = 1; i < 4; i++){
+        document.getElementById("windLoc" + i).innerHTML = locData[i-1][0];
     }
     return windData.slice(0, 3);
 }

@@ -1,5 +1,6 @@
 "use strict"
-function initTidePower(map, tideData) {
+
+function initTidalPower(map, tideData) {
     for (var i = 0; i < tideData.length; i++) { 
         if (parseFloat(tideData[i][3]) > 6.0){
             
@@ -11,7 +12,7 @@ function initTidePower(map, tideData) {
                 icon: {
                     path: google.maps.SymbolPath.CIRCLE,
                     scale: 10,
-                    fillColor: 'green',
+                    fillColor: 'grey',
                     fillOpacity: 0.6,
                     strokeWeight: 1,
                 }
@@ -34,7 +35,7 @@ function getBestTidalLocations(tideData) {
     var locData = tideData.slice(0,3);
     
     for (var i = 1; i < 4; i++) {
-        document.getElementById("tideLoc" + i).innerHTML = locData[i-1][0];
+        document.getElementById("tidalLoc" + i).innerHTML = locData[i-1][0];
     }
     return tideData.slice(0, 3);
 }
