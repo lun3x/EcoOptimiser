@@ -28,6 +28,9 @@ function getBestLocations(windData) {
         }
         return 0;
     });
-    
+    var locData = windData.slice(0,3);
+    for(var i=1;i<4;i++){
+        document.getElementById("windLoc"+i).innerHTML = locData[i-1][0];
+    }
     return windData.slice(0, 3);
 }

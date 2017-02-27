@@ -10,7 +10,7 @@
     <style>
       #map {
         height: 600px;
-        width: 75%;
+        width: 70%;
        }
     </style>
   </head>
@@ -32,23 +32,41 @@
                         onclick="loadList('Solar')">Solar</button>
                     </div>
                     <div class="w3-cell">
-                        <button id="button2" class="w3-cell w3-button w3-white w3-hover-red w3-border w3-border-red w3-round-large" onclick="loadList('Tidal')">Tidal</button>
+                        <button id="button2" class="w3-cell w3-button w3-white w3-hover-red w3-border w3-border-red w3-round-large" onclick="loadList('Tidal')">Hydro-Electric</button>
                     </div>
                 </div>
-                <div style="display:none" id="enList" class="w3-panel">
+                <div style="display:none" id="enList0" class="w3-panel">
                     <ul class="w3-ul">
-                        <li class="wr-green"><h3 id="listTitle"></h3></li>
-                        <li id="loc1">Loc 1</li>
-                        <li id="loc2">Loc 2</li>
-                        <li id="loc3">Loc 3</li>
+                        <li class="wr-green"><h3>Best Wind Locations</h3></li>
+                        <li id="windLoc1"></li>
+                        <li id="windLoc2"></li>
+                        <li id="windLoc3"></li>
+                    </ul>
+                </div>
+                <div style="display:none" id="enList1" class="w3-panel">
+                    <ul class="w3-ul">
+                        <li class="wr-green"><h3>Best Solar Locations</h3></li>
+                        <li id="solarLoc1">Loc 1</li>
+                        <li id="solarLoc2">Loc 2</li>
+                        <li id="solarLoc3">Loc 3</li>
+                    </ul>
+                </div>
+                <div style="display:none" id="enList2" class="w3-panel">
+                    <ul class="w3-ul">
+                        <li class="wr-green"><h3>Best Hydro-Electric Locations</h3></li>
+                        <li id="tideLoc1">Loc 1</li>
+                        <li id="tideLoc2">Loc 2</li>
+                        <li id="tideLoc3">Loc 3</li>
                     </ul>
                 </div>
             </div>
       </div>
     <script>
+     var windData = [];
+     var bestLocs = [];
       function initMap() {
         
-        var windData = [];
+        
           
         $(document).ready(function() {
             $.ajax({
@@ -63,6 +81,7 @@
                         center: uk
                     });
                     initWindPower(map,windData);
+                    getBestLocations(windData);
                 }
             });
         });
@@ -70,10 +89,9 @@
       }
     var buttonStatus = [0,0,0]
     function loadList(enType){
-        document.getElementById("enList").style.display = "block";
-        document.getElementById("listTitle").innerHTML = "Best " + enType + " Locations"
         if(enType=="Wind"){
             var i = 0;
+            bestLocs = getBestLocations(windData);
         }
         else if(enType=="Solar"){
             var i = 1;
@@ -83,20 +101,16 @@
         }
         if(buttonStatus[i]==0){
             document.getElementById("button"+parseInt(i)).className = "w3-button w3-hover-red w3-red w3-border w3-border-red w3-round-large"
+            document.getElementById("enList"+parseInt(i)).style.display = "block";
         }
         else{
             document.getElementById("button"+parseInt(i)).className = "w3-button w3-hover-red w3-white w3-border w3-border-red w3-round-large"
-            document.getElementById("enList").style.display = "none";
+            document.getElementById("enList"+parseInt(i)).style.display = "none";
         }
         buttonStatus[i] = 1 - buttonStatus[i];
             
     }
-        function loadSolar(){
-        document.getElementById("windList").style.display = "block";
-    }
-        function loadTidal(){
-        document.getElementById("windList").style.display = "block";
-    }
+
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS7yxaTkdNhukqXo0vFKA4nZfq_ZTip4k&callback=initMap">
