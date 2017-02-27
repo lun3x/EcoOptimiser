@@ -15,8 +15,13 @@ function initWindPower(map, windData) {
                     fillColor: 'green',
                     fillOpacity: 0.6,
                     strokeWeight: 1,
-                }
+                },
+                title: windData[i][0],
+                snippet: "hi"
             });
+            marker.addListener('click',function(){
+                marker.showInfoWindow();
+            })
             windMarkers.push(marker);
         }
     }
