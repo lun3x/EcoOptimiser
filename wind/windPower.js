@@ -1,11 +1,10 @@
 "use strict"
 
 function initWindPower(map, windData) {
-    var windMarkers = []
+    var windMarkers = [];
     for (var i = 0; i < windData.length; i++) { 
         if (parseFloat(windData[i][15]) > 5.7) {
             var positionM = {lat: parseFloat(windData[i][1]), lng: parseFloat(windData[i][2])};
-            
             var marker = new google.maps.Marker({
                 position: positionM,
                 map: map,
@@ -17,11 +16,7 @@ function initWindPower(map, windData) {
                     strokeWeight: 1,
                 },
                 title: windData[i][0],
-                snippet: "hi"
             });
-            marker.addListener('click',function(){
-                marker.showInfoWindow();
-            })
             windMarkers.push(marker);
         }
     }

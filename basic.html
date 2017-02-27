@@ -51,8 +51,8 @@
                 <div style="display:none" id="enList0" class="w3-panel">
                     <ul class="w3-ul">
                         <li class="w3-green"><h4>Best Wind Locations</h4></li>
-                        <li id="windLoc1"></li>
-                        <li id="windLoc2"></li>
+                        <li class="w3-hover-green" id="windLoc1"></li>
+                        <li class="w3-hover-green" id="windLoc2" onclick="location.href='#info'"></li>
                         <li id="windLoc3"></li>
                     </ul>
                 </div>
@@ -76,24 +76,21 @@
         </div>
       </div>
       <div id="page2" class="w3-panel">
+          <a href="info"></a>
           <h1>Information</h1>
       </div>
     <script>
-        function scrollTo() {
-            $('html, body').animate({ scrollTop: $('#page2').offset().top }, 'slow');
-        }
     var markers = [];
     var buttonStatus = [0,0,0]
     var map;
       function initMap() {
         var hydroData = [];
         var uk = {lat: 56.000, lng: -2.5478};
-        var map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 5,
                 center: uk
         });
         
-          
         $(document).ready(function() {
             $.ajax({
                 type: "GET",
@@ -130,7 +127,9 @@
             });
         });
       }
-
+    function changeFocus(){
+        document.getElementById("page2").focus();
+    }
     function changeButton(num,colour){
         if(buttonStatus[num]==0){
             document.getElementById("button"+parseInt(num)).className = "w3-button w3-hover-"+colour+" w3-"+colour+" w3-border w3-border-"+colour+" w3-round-large"
