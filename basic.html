@@ -55,16 +55,15 @@
                 <div style="display:none" id="enList2" class="w3-panel">
                     <ul class="w3-ul">
                         <li class="wr-green"><h3>Best Hydro-Electric Locations</h3></li>
-                        <li id="tideLoc1">Loc 1</li>
-                        <li id="tideLoc2">Loc 2</li>
-                        <li id="tideLoc3">Loc 3</li>
+                        <li id="hydroLoc1">Loc 1</li>
+                        <li id="hydroLoc2">Loc 2</li>
+                        <li id="hydroLoc3">Loc 3</li>
                     </ul>
                 </div>
             </div>
       </div>
     <script>
      var windData = [];
-     var bestLocs = [];
       function initMap() {
         
         
@@ -83,7 +82,7 @@
                 success: function(data) {
                     windData = processData(data);
                     initWindPower(map,windData);
-                    getBestLocations(windData);
+                    getBestWindLocations(windData);
                 }
             });
             $.ajax({
@@ -102,7 +101,6 @@
     function loadList(enType){
         if(enType=="Wind"){
             var i = 0;
-            bestLocs = getBestLocations(windData);
         }
         else if(enType=="Solar"){
             var i = 1;
