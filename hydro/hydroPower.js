@@ -13,7 +13,6 @@ function calculateUpperQuartile(hydroData){
     for (var j = upperQuartile; j < hydroData.length; j++){
         upperQuartData.push(meanFlow[j]);
     }
-    alert(upperQuartData.length);
     return upperQuartData;
 }
 
