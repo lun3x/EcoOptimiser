@@ -1,17 +1,16 @@
-"use strict"
+"use strict";
 //hydroData[9] = Latitude
 //hydroData[10] = Longitude
 //hydroData[6] = meanFlow
-function calculateUpperQuartile(hydroData){
-    var meanFlow = []
+function calculateUpperQuartile(hydroData) {
+    var meanFlow = [];
     for (var i = 0; i < hydroData.length; i++) { 
         meanFlow.push(hydroData[i][6]);
     }
-    meanFlow.sort();
-    alert(meanFlow);
-    var upperQuartile = parseInt((meanFlow.length+1)*0.75);
+    meanFlow.sort(function(a,b) { return a - b;});;
+    var upperQuartile = parseInt((meanFlow.length+1)*0.95);
     var upperQuartData = meanFlow.slice(upperQuartile, meanFlow.length+1);
-    
+    console.log(upperQuartData);
     return upperQuartData;
 }
 
@@ -34,15 +33,16 @@ function initHydroPower(map, hydroData){
         }
     }
     hydroData.sort(function (a, b) {
-        if (a[6] > b[6]) {
+        if(a[6]>b[6]){
             return 1;
         }
-        if (a[6] < b[6]) {
+        if(a[6]<b[6]){
             return -1;
         }
         return 0;
     });
     var locData = hydroData.slice(0,4);
+    console.log(locData);
     for(var i=1;i<4;i++){
         document.getElementById("hydroLoc"+i).innerHTML = "River: " + locData[i-1][1] + " | Location: " + locData[i-1][2];
         

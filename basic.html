@@ -26,19 +26,19 @@
                 <h3>Optimal Locations for:</h3>
                 <div class="w3-cell-row">
                     <div class="w3-cell">
-                        <button id="button0" class="w3-button w3-hover-red w3-white w3-border w3-border-red w3-round-large" onclick="loadList('Wind')">Wind</button>
+                        <button id="button0" class="w3-button w3-hover-green w3-white w3-border w3-border-green w3-round-large" onclick="loadList('Wind')">Wind</button>
                     </div>
                     <div class="w3-cell">
                         <button id="button1" class="w3-cell w3-button w3-hover-red w3-white w3-border w3-border-red w3-round-large" 
                         onclick="loadList('Solar')">Solar</button>
                     </div>
                     <div class="w3-cell">
-                        <button id="button2" class="w3-cell w3-button w3-white w3-hover-red w3-border w3-border-red w3-round-large" onclick="loadList('Hydro')">Hydro-Electric</button>
+                        <button id="button2" class="w3-cell w3-button w3-white w3-hover-blue w3-border w3-border-blue w3-round-large" onclick="loadList('Hydro')">Hydro-Electric</button>
                     </div>
                 </div>
                 <div class="w3-cell-row w3-panel w3-centre">
                     <div class="w3-cell w3-centre">
-                        <button id="button3" class="w3-button w3-hover-red w3-white w3-border w3-border-red w3-round-large" onclick="loadList('Tidal')">Tidal</button>
+                        <button id="button3" class="w3-button w3-hover-grey w3-white w3-border w3-border-grey w3-round-large" onclick="loadList('Tidal')">Tidal</button>
                     </div>
                 </div>
                 <div style="display:none" id="enList0" class="w3-panel">
@@ -113,27 +113,30 @@
     var buttonStatus = [0,0,0,0]
     function loadList(enType){
         if(enType=="Wind"){
-            var i = 0;
+            changeButton(0,"green");
         }
         else if(enType=="Solar"){
-            var i = 1;
+            changeButton(1,"red");
         }
         else if(enType=="Hydro"){
-            var i = 2;
+            changeButton(2,"blue");
         }
         else if(enType=="Tidal"){
-            var i = 3;
-        }
-        if(buttonStatus[i]==0){
-            document.getElementById("button"+parseInt(i)).className = "w3-button w3-hover-red w3-red w3-border w3-border-red w3-round-large"
-            document.getElementById("enList"+parseInt(i)).style.display = "block";
+            changeButton(3,"grey");
+        }            
+    }
+    
+    function changeButton(num,colour){
+        if(buttonStatus[num]==0){
+            document.getElementById("button"+parseInt(num)).className = "w3-button w3-hover-"+colour+" w3-"+colour+" w3-border w3-border-"+colour+" w3-round-large"
+            document.getElementById("enList"+parseInt(num)).style.display = "block";
         }
         else{
-            document.getElementById("button"+parseInt(i)).className = "w3-button w3-hover-red w3-white w3-border w3-border-red w3-round-large"
-            document.getElementById("enList"+parseInt(i)).style.display = "none";
+           document.getElementById("button"+parseInt(num)).className = "w3-button w3-hover-"+colour+" w3-white w3-border w3-border- "+colour+" w3-round-large"
+            document.getElementById("enList"+parseInt(num)).style.display = "none";
         }
-        buttonStatus[i] = 1 - buttonStatus[i];
-            
+        buttonStatus[num] = 1 - buttonStatus[num];
+
     }
 
     </script>
