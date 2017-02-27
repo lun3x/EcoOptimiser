@@ -30,21 +30,17 @@
                         <button id="button0" class="w3-button w3-hover-green w3-white w3-border w3-border-green w3-round-large" onclick="loadList('Wind')">Wind</button>
                     </div>
                     <div class="w3-cell">
-                        <button id="button1" class="w3-cell w3-button w3-hover-red w3-white w3-border w3-border-red w3-round-large" 
-                        onclick="loadList('Solar')">Solar</button>
+                        <div class="w3-cell w3-centre">
+                        <button id="button1" class="w3-button w3-hover-blue w3-white w3-border w3-border-blue w3-round-large" onclick="loadList('Hydro')">Hydro-Electric</button>
+                    </div>
                     </div>
                     <div class="w3-cell">
-                        <button id="button2" class="w3-cell w3-button w3-white w3-hover-blue w3-border w3-border-blue w3-round-large" onclick="loadList('Hydro')">Hydro-Electric</button>
-                    </div>
-                </div>
-                <div class="w3-cell-row w3-panel w3-centre">
-                    <div class="w3-cell w3-centre">
-                        <button id="button3" class="w3-button w3-hover-grey w3-white w3-border w3-border-grey w3-round-large" onclick="loadList('Tidal')">Tidal</button>
+                        <button id="button2" class="w3-cell w3-button w3-white w3-hover-grey w3-border w3-border-grey w3-round-large" onclick="loadList('Tidal')">Tidal</button>
                     </div>
                 </div>
                 <div style="display:none" id="enList0" class="w3-panel">
                     <ul class="w3-ul">
-                        <li class="w3-green"><h3>Best Wind Locations</h3></li>
+                        <li class="w3-green"><h4>Best Wind Locations</h4></li>
                         <li id="windLoc1"></li>
                         <li id="windLoc2"></li>
                         <li id="windLoc3"></li>
@@ -52,30 +48,22 @@
                 </div>
                 <div style="display:none" id="enList1" class="w3-panel">
                     <ul class="w3-ul">
-                        <li class="w3-green"><h3>Best Solar Locations</h3></li>
-                        <li id="solarLoc1">Loc 1</li>
-                        <li id="solarLoc2">Loc 2</li>
-                        <li id="solarLoc3">Loc 3</li>
-                    </ul>
-                </div>
-                <div style="display:none" id="enList2" class="w3-panel">
-                    <ul class="w3-ul">
-                        <li class="wr-green"><h3>Best Hydro-Electric Locations</h3></li>
+                        <li class="w3-blue"><h4>Best Hydro-Electric Locations</h4></li>
                         <li id="hydroLoc1">Loc 1</li>
                         <li id="hydroLoc2">Loc 2</li>
                         <li id="hydroLoc3">Loc 3</li>
                     </ul>
                 </div>
-                <div style="display:none" id="enList3" class="w3-panel">
+                <div style="display:none" id="enList2" class="w3-panel">
                     <ul class="w3-ul">
-                        <li class="w3-green"><h3>Best Tidal Locations</h3></li>
+                        <li class="w3-grey"><h4>Best Tidal Locations</h4></li>
                         <li id="tidalLoc1">Loc 1</li>
                         <li id="tidalLoc2">Loc 2</li>
                         <li id="tidalLoc3">Loc 3</li>
                     </ul>
                 </div>
             </div>
-      </div>
+            </div>
     <script>
      var windData = [];
       function initMap() {
@@ -120,19 +108,16 @@
         });
 
       }
-    var buttonStatus = [0,0,0,0]
+    var buttonStatus = [0,0,0]
     function loadList(enType){
         if(enType=="Wind"){
             changeButton(0,"green");
         }
-        else if(enType=="Solar"){
-            changeButton(1,"red");
-        }
         else if(enType=="Hydro"){
-            changeButton(2,"blue");
+            changeButton(1,"blue");
         }
         else if(enType=="Tidal"){
-            changeButton(3,"grey");
+            changeButton(2,"grey");
         }            
     }
     
