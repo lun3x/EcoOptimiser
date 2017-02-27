@@ -6,6 +6,7 @@
     <script src="lib/jquery-3.1.1.min.js"></script>
     <script src="lib/jquery.csv.js"></script>
     <script src="wind/windPower.js" type="text/javascript"></script> 
+    <script src="hydro/hydroPower.js" type="text/javascript"></script>
     <script src="dataReading.js" type="text/javascript"></script> 
     <style>
       #map {
@@ -41,6 +42,12 @@
       function initMap() {
         
         var windData = [];
+        var hydroData = [];
+        var uk = {lat: 54.000, lng: -2.5478};
+        var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 5,
+                center: uk
+        });
           
         $(document).ready(function() {
             $.ajax({
@@ -49,12 +56,16 @@
                 dataType: "text",
                 success: function(data) {
                     windData = processData(data);
-                    var uk = {lat: 54.000, lng: -2.5478};
-                    var map = new google.maps.Map(document.getElementById('map'), {
-                        zoom: 5,
-                        center: uk
-                    });
                     initWindPower(map,windData);
+                }
+            });
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8000/hydro/hydroData.csv",
+                dataType: "text",
+                success: function(data) {
+                    hydroData = processData(data);
+                    initHydroPower(map,hydroData);
                 }
             });
         });
