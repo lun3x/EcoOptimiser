@@ -6,11 +6,12 @@
     <script src="lib/jquery-3.1.1.min.js"></script>
     <script src="lib/jquery.csv.js"></script>
     <script src="wind/windPower.js" type="text/javascript"></script> 
+    <script src="hydro/hydroPower.js" type="text/javascript"></script>
     <script src="dataReading.js" type="text/javascript"></script> 
     <style>
       #map {
         height: 600px;
-        width: 75%;
+        width: 70%;
        }
     </style>
   </head>
@@ -25,22 +26,54 @@
                 <h3>Optimal Locations for:</h3>
                 <div class="w3-cell-row">
                     <div class="w3-cell">
-                        <button class="w3-button w3-white w3-border w3-border-red w3-round-large" onclick="loadWind()">Wind</button>
+                        <button id="button0" class="w3-button w3-hover-red w3-white w3-border w3-border-red w3-round-large" onclick="loadList('Wind')">Wind</button>
                     </div>
                     <div class="w3-cell">
-                        <button class="w3-cell w3-button w3-white w3-border w3-border-red w3-round-large" 
-                        onclick="loadMap(1)">Solar</button>
+                        <button id="button1" class="w3-cell w3-button w3-hover-red w3-white w3-border w3-border-red w3-round-large" 
+                        onclick="loadList('Solar')">Solar</button>
                     </div>
                     <div class="w3-cell">
-                        <button class="w3-cell w3-button w3-white w3-border w3-border-red w3-round-large" onclick="loadMap(2)">Tidal</button>
+                        <button id="button2" class="w3-cell w3-button w3-white w3-hover-red w3-border w3-border-red w3-round-large" onclick="loadList('Tidal')">Hydro-Electric</button>
                     </div>
+                </div>
+                <div style="display:none" id="enList0" class="w3-panel">
+                    <ul class="w3-ul">
+                        <li class="wr-green"><h3>Best Wind Locations</h3></li>
+                        <li id="windLoc1"></li>
+                        <li id="windLoc2"></li>
+                        <li id="windLoc3"></li>
+                    </ul>
+                </div>
+                <div style="display:none" id="enList1" class="w3-panel">
+                    <ul class="w3-ul">
+                        <li class="wr-green"><h3>Best Solar Locations</h3></li>
+                        <li id="solarLoc1">Loc 1</li>
+                        <li id="solarLoc2">Loc 2</li>
+                        <li id="solarLoc3">Loc 3</li>
+                    </ul>
+                </div>
+                <div style="display:none" id="enList2" class="w3-panel">
+                    <ul class="w3-ul">
+                        <li class="wr-green"><h3>Best Hydro-Electric Locations</h3></li>
+                        <li id="tideLoc1">Loc 1</li>
+                        <li id="tideLoc2">Loc 2</li>
+                        <li id="tideLoc3">Loc 3</li>
+                    </ul>
                 </div>
             </div>
       </div>
     <script>
+     var windData = [];
+     var bestLocs = [];
       function initMap() {
         
-        var windData = [];
+        
+        var hydroData = [];
+        var uk = {lat: 54.000, lng: -2.5478};
+        var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 5,
+                center: uk
+        });
           
         $(document).ready(function() {
             $.ajax({
@@ -49,17 +82,46 @@
                 dataType: "text",
                 success: function(data) {
                     windData = processData(data);
-                    var uk = {lat: 54.000, lng: -2.5478};
-                    var map = new google.maps.Map(document.getElementById('map'), {
-                        zoom: 5,
-                        center: uk
-                    });
                     initWindPower(map,windData);
+                    getBestLocations(windData);
+                }
+            });
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8000/hydro/hydroData.csv",
+                dataType: "text",
+                success: function(data) {
+                    hydroData = processData(data);
+                    initHydroPower(map,hydroData);
                 }
             });
         });
 
       }
+    var buttonStatus = [0,0,0]
+    function loadList(enType){
+        if(enType=="Wind"){
+            var i = 0;
+            bestLocs = getBestLocations(windData);
+        }
+        else if(enType=="Solar"){
+            var i = 1;
+        }
+        else if(enType=="Tidal"){
+            var i = 2;
+        }
+        if(buttonStatus[i]==0){
+            document.getElementById("button"+parseInt(i)).className = "w3-button w3-hover-red w3-red w3-border w3-border-red w3-round-large"
+            document.getElementById("enList"+parseInt(i)).style.display = "block";
+        }
+        else{
+            document.getElementById("button"+parseInt(i)).className = "w3-button w3-hover-red w3-white w3-border w3-border-red w3-round-large"
+            document.getElementById("enList"+parseInt(i)).style.display = "none";
+        }
+        buttonStatus[i] = 1 - buttonStatus[i];
+            
+    }
+
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS7yxaTkdNhukqXo0vFKA4nZfq_ZTip4k&callback=initMap">
