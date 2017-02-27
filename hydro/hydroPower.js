@@ -21,8 +21,8 @@ function getUpperQuartile(hydroData){
 }
 
 function initHydroPower(map, hydroData){
+    var hydroMarkers = [];
     var upperQuartile = getUpperQuartile(hydroData);
-    
     for (var i = 0; i < upperQuartile.length; i++) { 
         var positionM = {lat: parseFloat(upperQuartile[i][9]), lng: parseFloat(upperQuartile[i][10])};
         
@@ -37,7 +37,9 @@ function initHydroPower(map, hydroData){
                 strokeWeight: 1,
             }
         });
+        hydroMarkers.push(marker);
     }
+    return hydroMarkers;
 }
 
 function getBestHydroLocations(hydroData) {

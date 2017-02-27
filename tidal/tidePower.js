@@ -1,6 +1,7 @@
 "use strict"
 
 function initTidalPower(map, tideData) {
+    var tidalMarkers = [];
     for (var i = 0; i < tideData.length; i++) { 
         if (parseFloat(tideData[i][3]) > 6.0){
             
@@ -17,8 +18,10 @@ function initTidalPower(map, tideData) {
                     strokeWeight: 1,
                 }
             });
+            tidalMarkers.push(marker);
         }
     }
+    return tidalMarkers;
 }
 
 function getBestTidalLocations(tideData) {
