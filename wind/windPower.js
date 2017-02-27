@@ -40,3 +40,22 @@ function getBestWindLocations(windData) {
     }
     return windData.slice(0, 3);
 }
+
+// Scilly: 2,945,327 kWh
+// Tiree: 2,567,033 kWh
+// Shetland Islands: 2,427,124 kWh
+function fillInWindInfoPage(placeTitle, energyType) {
+    document.getElementById("placetitle").innerHTML = placeTitle;
+    document.getElementById("energytype").innerHTML = energyType;
+    var potentialValue;
+    if(placeTitle == "Scilly"){
+        potentialValue = "2,945,327 kWh";
+    }
+    if(placeTitle == "Tiree"){
+        potentialValue = "2,567,033 kWh";
+    }
+    if(placeTitle == "Shetland"){
+        potentialValue = "2,427,124 kWh";
+    }
+    document.getElementById("potentialenergyYearly").innerHTML = potentialValue;
+}

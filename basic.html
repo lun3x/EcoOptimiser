@@ -9,6 +9,7 @@
     <script src="hydro/hydroPower.js" type="text/javascript"></script>
     <script src="tidal/tidePower.js" type="text/javascript"></script>
     <script src="dataReading.js" type="text/javascript"></script> 
+    <script src="renewableCalc.js" type="text/javascript"></script>
     <style>
       #map {
         height: 100%;
@@ -78,6 +79,12 @@
       <div id="page2" class="w3-panel">
           <a href="info"></a>
           <h1>Information</h1>
+          <p id="placetitle">Scilly</p>
+          <p id="energytype">Wind</p>
+          <p id="potentialenergyYearly">5000kwh</p>
+          <p id="estimatedcost">£5000000</p>
+          <div id="satelitepic" class="w3-cell w3-panel w3-border"></div>
+          <p id="constants"></p>
       </div>
     <script>
     var markers = [];
