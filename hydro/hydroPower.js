@@ -8,11 +8,10 @@ function calculateUpperQuartile(hydroData){
         meanFlow.push(hydroData[i][6]);
     }
     meanFlow.sort();
+    alert(meanFlow);
     var upperQuartile = parseInt((meanFlow.length+1)*0.75);
-    var upperQuartData = [];
-    for (var j = upperQuartile; j < hydroData.length; j++){
-        upperQuartData.push(meanFlow[j]);
-    }
+    var upperQuartData = meanFlow.slice(upperQuartile, meanFlow.length+1);
+    
     return upperQuartData;
 }
 
@@ -26,7 +25,7 @@ function initHydroPower(map, hydroData){
                 map: map,
                 icon: {
                     path: google.maps.SymbolPath.CIRCLE,
-                    scale: 10,
+                    scale: 5,
                     fillColor: 'blue',
                     fillOpacity: 0.6,
                     strokeWeight: 1,
