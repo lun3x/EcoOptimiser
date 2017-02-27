@@ -37,15 +37,15 @@
                 <h3>Optimal Locations for:</h3>
                 <div class="w3-cell-row">
                     <div class="w3-cell">
-                        <button id="button0" class="w3-button w3-hover-green w3-white w3-border w3-border-green w3-round-large" onclick="loadList('Wind')">Wind</button>
+                        <button id="button0" class="w3-button w3-hover-green w3-white w3-border w3-border-green w3-round-large" onclick="changeButton(0,'green')">Wind</button>
                     </div>
                     <div class="w3-cell">
                         <div class="w3-cell w3-centre">
-                        <button id="button1" class="w3-button w3-hover-blue w3-white w3-border w3-border-blue w3-round-large" onclick="loadList('Hydro')">Hydro-Electric</button>
+                        <button id="button1" class="w3-button w3-hover-blue w3-white w3-border w3-border-blue w3-round-large" onclick="changeButton(1,'blue')">Hydro-Electric</button>
                     </div>
                     </div>
                     <div class="w3-cell">
-                        <button id="button2" class="w3-cell w3-button w3-white w3-hover-grey w3-border w3-border-grey w3-round-large" onclick="loadList('Tidal')">Tidal</button>
+                        <button id="button2" class="w3-cell w3-button w3-white w3-hover-grey w3-border w3-border-grey w3-round-large" onclick="changeButton(2,'grey')">Tidal</button>
                     </div>
                 </div>
                 <div style="display:none" id="enList0" class="w3-panel">
@@ -79,7 +79,9 @@
           <h1>Information</h1>
       </div>
     <script>
-     var windData = [];
+    var markers = [];
+    var buttonStatus = [0,0,0]
+    var map;
       function initMap() {
         var hydroData = [];
         var uk = {lat: 56.000, lng: -2.5478};
@@ -87,6 +89,7 @@
                 zoom: 5,
                 center: uk
         });
+        
           
         $(document).ready(function() {
             $.ajax({
@@ -95,7 +98,8 @@
                 dataType: "text",
                 success: function(data) {
                     windData = processData(data);
-                    initWindPower(map, windData);
+                    markers[0] = initWindPower(map, windData);
+                    setMapOnAll(null,markers[0]);
                     getBestWindLocations(windData);
                 }
             });
@@ -105,8 +109,9 @@
                 dataType: "text",
                 success: function(data) {
                     hydroData = processData(data);
-                    initHydroPower(map, hydroData);
-                    getBestHydroLocations(hydroData)
+                    markers[1] = initHydroPower(map, hydroData);
+                    setMapOnAll(null,markers[1]);
+                    getBestHydroLocations(hydroData);
                 }
             });
             $.ajax({
@@ -115,41 +120,33 @@
                 dataType: "text",
                 success: function(data) {
                     tideData = processData(data);
-                    initTidalPower(map, tideData);
+                    markers[2] = initTidalPower(map, tideData);
+                    setMapOnAll(null,markers[2]);
                     getBestTidalLocations(tideData);
                 }
             });
         });
-
       }
-        
-    var buttonStatus = [0,0,0];
-        
-    function loadList(enType) {
-        if (enType == "Wind"){
-            changeButton(0,"green");
-        }
-        else if (enType=="Hydro") {
-            changeButton(1,"blue");
-        }
-        else if (enType=="Tidal") {
-            changeButton(2,"grey");
-        }            
-    }
-    
+
     function changeButton(num,colour){
         if(buttonStatus[num]==0){
             document.getElementById("button"+parseInt(num)).className = "w3-button w3-hover-"+colour+" w3-"+colour+" w3-border w3-border-"+colour+" w3-round-large"
             document.getElementById("enList"+parseInt(num)).style.display = "block";
+            setMapOnAll(map,markers[num]);
         }
         else{
-           document.getElementById("button"+parseInt(num)).className = "w3-button w3-hover-"+colour+" w3-white w3-border w3-border- "+colour+" w3-round-large"
+            document.getElementById("button"+parseInt(num)).className = "w3-button w3-hover-"+colour+" w3-white w3-border w3-border- "+colour+" w3-round-large"
             document.getElementById("enList"+parseInt(num)).style.display = "none";
+            setMapOnAll(null,markers[num]);
         }
         buttonStatus[num] = 1 - buttonStatus[num];
-
     }
 
+function setMapOnAll(map,markers) {
+    for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+    }
+}
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS7yxaTkdNhukqXo0vFKA4nZfq_ZTip4k&callback=initMap">
