@@ -67,5 +67,5 @@ function getBestTidalLocations(tideData) {
     for (var i = 1; i < 4; i++) {
         document.getElementById("tidalLoc" + i).innerHTML = locData[i-1][0];
     }
-    return tideData.reverse().slice(0, 3);
+    return tideData.slice(0, 3);
 }
