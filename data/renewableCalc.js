@@ -48,13 +48,13 @@ function fillInInfoPage(placeTitle, energyType, energyData) {
         case "wind":
             switch (placeTitle) {
                 case "Scilly":
-                    potentialValue = "2,945,327";
+                    potentialValue = "2945327";
                     break;
                 case "Tiree":
-                    potentialValue = "2,567,033";
+                    potentialValue = "2567033";
                     break;
                 case "Shetland Island":
-                    potentialValue = "2,427,124";
+                    potentialValue = "2427124";
                     break;
             }
             url += energyData[1] + "," + energyData[2];
