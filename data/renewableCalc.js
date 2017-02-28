@@ -57,19 +57,22 @@ function fillInInfoPage(placeTitle, energyType, energyData) {
                     potentialValue = "2,427,124";
                     break;
             }
-            url = url + energyData[1] + "," + energyData[2];
-            dataSource += "Information on viability of wind farms: http://windeis.anl.gov/guide/basics/ \n Data for wind "
+            url += energyData[1] + "," + energyData[2];
+            dataSource += "Information on viability of wind farms: http://windeis.anl.gov/guide/basics/ | Wind speed data: http://www.rensmart.com/Weather/WindArchive#monthlyLayer";
             break;
         case "tidal":
             potentialValue = tidalPower(energyData[3]);
-            url = url + energyData[1] + "," + energyData[2];
+            url += energyData[1] + "," + energyData[2];
+            dataSource += "Tidal height difference data: https://www.bodc.ac.uk/data/hosted_data_systems/sea_level/uk_tide_gauge_network/processed/";
             break;
         case "hydro":
             potentialValue = hydroPower(energyData[6]);
-            url = url + energyData[9] + "," + energyData[10];
+            url += energyData[9] + "," + energyData[10];
+            dataSource += "Daily gauge flow river data: ";
             break;
     }
     
     $("#satellitepic").attr("src", url);
     document.getElementById("potentialenergyyearly").innerHTML = numberWithCommas(potentialValue) + " kWh";
+    document.getElementById("datasources").innerHTML = dataSource;
 }
