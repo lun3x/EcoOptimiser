@@ -6,7 +6,7 @@ function hydroPower(volumeFlow){
     var fallingHeight = 50;
     var gravAccel = 9.81;
     
-    var kiloWatts = efficiency * density * fallingHeight * gravAccel * 60 * 60;
+    var kiloWatts = efficiency * volumeFlow * fallingHeight * gravAccel * 60 * 60 * 24 * 365;
     
     return Math.floor(kiloWatts);
 }
