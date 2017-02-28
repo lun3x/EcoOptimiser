@@ -16,8 +16,9 @@ function tidalPower(tideChange){
     var barrageBasin = 1000;
     var densitySW = 1025;
     var efficiency = 0.8;
+    alert(tideChange);
     
-    var kiloWatts = 0.5 * barrageBasin * gravAccel * densitySW * tideChange * tideChange * 86400 * 365 * 2 * efficiency;
+    var  kiloWatts = barrageBasin * densitySW * gravAccel * tideChange * tideChange * efficiency * 365;
     
     return Math.floor(kiloWatts); 
 }
