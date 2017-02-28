@@ -3,7 +3,7 @@
 function initWindPower(map, windData) {
     var windMarkers = [];
     for (var i = 0; i < windData.length; i++) { 
-        if (parseFloat(windData[i][15]) > 0) {
+        if (parseFloat(windData[i][15]) > 5.6) {
             var positionM = {lat: parseFloat(windData[i][1]), lng: parseFloat(windData[i][2])};
             var marker = new google.maps.Marker({
                 position: positionM,

@@ -15,7 +15,7 @@ function hydroPower(volumeFlow){
     
     var kiloWatts = efficiency * density * fallingHeight * gravAccel * 60 * 60;
     
-    return Math.floor(kiloWatts);
+    return Math.floor(kiloWatts / 1000);
 }
 
 function tidalPower(tideChange){
@@ -26,7 +26,7 @@ function tidalPower(tideChange){
     
     var kiloWatts = 0.5 * barrageBasin * gravAccel * densitySW * tideChange * tideChange * 86400 * 2 * efficiency;
     
-    return Math.floor(kiloWatts); 
+    return Math.floor(kiloWatts / 1000); 
 }
 
 function numberWithCommas(x) {
@@ -39,8 +39,9 @@ function numberWithCommas(x) {
 
 function fillInInfoPage(placeTitle, energyType, energyData) {
     document.getElementById("placetitle").innerHTML = placeTitle;
-    document.getElementById("energytype").innerHTML = energyType;
+    document.getElementById("potentialenergytext").innerHTML = "of " + energyType + " energy could potentially be produced per year!";
     var potentialValue;
+    var url = "https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyArmSsMW1jE6PGnwFVljdROcq7LIejxGMw&size=900x300&maptype=hybrid&zoom=12&scale=2&center=";
     
     switch (energyType) {
         case "wind":
@@ -55,14 +56,18 @@ function fillInInfoPage(placeTitle, energyType, energyData) {
                     potentialValue = "2,427,124";
                     break;
             }
+            url = url + energyData[1] + "," + energyData[2];
             break;
         case "tidal":
             potentialValue = tidalPower(energyData[3]);
+            url = url + energyData[1] + "," + energyData[2];
             break;
         case "hydro":
             potentialValue = hydroPower(energyData[6]);
+            url = url + energyData[9] + "," + energyData[10];
             break;
     }
     
+    $("#satellitepic").attr("src", url);
     document.getElementById("potentialenergyyearly").innerHTML = numberWithCommas(potentialValue) + " kWh";
 }
