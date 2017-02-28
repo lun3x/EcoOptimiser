@@ -38,9 +38,25 @@ function initHydroPower(map, hydroData){
             },
             title: upperQuartile[i][2]
         });
+        
+        addPlaceToMarker(marker, upperQuartile[i]);
+        
         hydroMarkers.push(marker);
     }
     return hydroMarkers;
+}
+
+function addPlaceToMarker(marker, place) {
+    marker.addListener('click', function() {
+        console.log(marker.title);
+        fillInInfoPage(marker.title, "hydro", place);
+        
+        document.getElementById('page2').style.display = "block";
+
+        $('html, body').animate({
+                scrollTop: $("#page2").offset().top
+        }, 750);
+    });
 }
 
 function getBestHydroLocations(hydroData) {

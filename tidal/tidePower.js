@@ -1,28 +1,51 @@
 "use strict"
 
-function initTidalPower(map, tideData) {
-    var tidalMarkers = [];
-    for (var i = 0; i < tideData.length; i++) { 
-        if (parseFloat(tideData[i][3]) > 6.0){
-            
-            var positionM = {lat: parseFloat(tideData[i][1]), lng: parseFloat(tideData[i][2])};
-            
-            var marker = new google.maps.Marker({
-                position: positionM,
-                map: map,
-                icon: {
-                    path: google.maps.SymbolPath.CIRCLE,
-                    scale: 10,
-                    fillColor: 'grey',
-                    fillOpacity: 0.6,
-                    strokeWeight: 1,
-                },
-                title: tideData[i][0],
-            });
-            tidalMarkers.push(marker);
+function getViablePlaces(tideData) {
+    var viables = [];
+    for (var i = 0; i < tideData.length; i++) {
+        if (parseFloat(tideData[i][3]) > 6.0) {
+            viables.push(tideData[i]);
         }
     }
+    return viables;
+}
+
+function initTidalPower(map, tideData) {
+    var tidalMarkers = [];
+    var viables = getViablePlaces(tideData);
+    for (var i = 0; i < viables.length; i++) {       
+        var positionM = {lat: parseFloat(viables[i][1]), lng: parseFloat(viables[i][2])};
+
+        var marker = new google.maps.Marker({
+            position: positionM,
+            map: map,
+            icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: 10,
+                fillColor: 'grey',
+                fillOpacity: 0.6,
+                strokeWeight: 1,
+            },
+            title: viables[i][0],
+        });
+
+        addPlaceToMarker(marker, viables[i]);
+
+        tidalMarkers.push(marker);
+    }
     return tidalMarkers;
+}
+
+function addPlaceToMarker(marker, place) {
+    marker.addListener('click', function() {
+        fillInInfoPage(place[0], "tidal", place);
+        
+        document.getElementById('page2').style.display = "block";
+
+        $('html, body').animate({
+                scrollTop: $("#page2").offset().top
+        }, 750);
+    });
 }
 
 function getBestTidalLocations(tideData) {

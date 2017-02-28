@@ -26,6 +26,7 @@ function numberWithCommas(x) {
 }
 
 function fillInInfoPage(placeTitle, energyType, energyData) {
+    console.log(placeTitle);
     document.getElementById("placetitle").innerHTML = placeTitle;
     document.getElementById("potentialenergytext").innerHTML = "of " + energyType + " energy could potentially be produced per year!";
     var dataSource = "Data sources: ";

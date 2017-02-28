@@ -297,8 +297,6 @@
             }
 
             function scrollTo(enType, enNum){
-                document.getElementById('page2').style.display = "block";
-
                 var placeName = document.getElementById(enType + "Loc" + enNum).innerHTML;
                 var enData;
                 
@@ -321,6 +319,7 @@
                 }
             
                 fillInInfoPage(placeName, enType, enData);
+                document.getElementById('page2').style.display = "block";
                 
                 $('html, body').animate({
                         scrollTop: $("#page2").offset().top

@@ -1,25 +1,38 @@
-"use strict"
+'use strict'
+
+function getViablePlaces(windData) {
+    var viables = [];
+    for (var i = 0; i < windData.length; i++) {
+        if (parseFloat(windData[i][15]) > 5.6) {
+            viables.push(windData[i]);
+        }
+    }
+    return viables;
+}
 
 function initWindPower(map, windData) {
     var windMarkers = [];
-    for (var i = 0; i < windData.length; i++) { 
-        if (parseFloat(windData[i][15]) > 5.6) {
-            var positionM = {lat: parseFloat(windData[i][1]), lng: parseFloat(windData[i][2])};
-            var marker = new google.maps.Marker({
-                position: positionM,
-                map: map,
-                icon: {
-                    path: google.maps.SymbolPath.CIRCLE,
-                    scale: 10,
-                    fillColor: 'green',
-                    fillOpacity: 0.6,
-                    strokeWeight: 1,
-                },
-                title: windData[i][0],
-            });
-            windMarkers.push(marker);
-        }
+    var viables = getViablePlaces(windData);
+    for (var i = 0; i < viables.length; i++) { 
+        var positionM = {lat: parseFloat(viables[i][1]), lng: parseFloat(viables[i][2])};
+
+        var marker = new google.maps.Marker({
+            position: positionM,
+            map: map,
+            icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: 10,
+                fillColor: 'green',
+                fillOpacity: 0.6,
+                strokeWeight: 1,
+            },
+            title: viables[i][0],
+            id: i,
+        });
+        
+        windMarkers.push(marker);
     }
+    
     return windMarkers;
 }
 
