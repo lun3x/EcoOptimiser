@@ -30,10 +30,27 @@ function initWindPower(map, windData) {
             id: i,
         });
         
+        addWindPlaceToMarker(marker, viables[i]);
+        
         windMarkers.push(marker);
     }
     
     return windMarkers;
+}
+
+function addWindPlaceToMarker(marker, place) {
+    marker.addListener('click', function() {
+        fillInInfoPage(place[0], "wind", place);
+        
+        document.getElementById('page2').style.display = "block";
+
+        document.getElementById("placetitle").className = "w3-green";
+        document.getElementById("potentialenergyyearly").className = "w3-green";
+        
+        $('html, body').animate({
+                scrollTop: $("#page2").offset().top
+        }, 750);
+    });
 }
 
 function initWindFarms(map, windFarmData) {

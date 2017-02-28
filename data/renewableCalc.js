@@ -1,4 +1,4 @@
-"use strict"
+'use strict'
 
 function hydroPower(volumeFlow){
     var efficiency = 0.9;
@@ -44,6 +44,9 @@ function fillInInfoPage(placeTitle, energyType, energyData) {
                     break;
                 case "Shetland Island":
                     potentialValue = "2427124";
+                    break;
+                default:
+                    potentialValue = "Unknown";
                     break;
             }
             url += energyData[1] + "," + energyData[2];
