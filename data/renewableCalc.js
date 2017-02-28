@@ -1,12 +1,5 @@
 "use strict"
 
-
-//Predicted turbine outputs:
-// Scilly: 2,945,327 kWh
-// Tiree: 2,567,033 kWh
-// Shetland Islands: 2,427,124 kWh
-
-
 function hydroPower(volumeFlow){
     var efficiency = 0.9;
     var density = 1000;
@@ -15,7 +8,7 @@ function hydroPower(volumeFlow){
     
     var kiloWatts = efficiency * density * fallingHeight * gravAccel * 60 * 60;
     
-    return Math.floor(kiloWatts / 1000);
+    return Math.floor(kiloWatts);
 }
 
 function tidalPower(tideChange){
@@ -24,18 +17,14 @@ function tidalPower(tideChange){
     var densitySW = 1025;
     var efficiency = 0.8;
     
-    var kiloWatts = 0.5 * barrageBasin * gravAccel * densitySW * tideChange * tideChange * 86400 * 2 * efficiency;
+    var kiloWatts = 0.5 * barrageBasin * gravAccel * densitySW * tideChange * tideChange * 86400 * 365 * 2 * efficiency;
     
-    return Math.floor(kiloWatts / 1000); 
+    return Math.floor(kiloWatts); 
 }
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-
-// Scilly: 2,945,327 kWh
-// Tiree: 2,567,033 kWh
-// Shetland Islands: 2,427,124 kWh
 
 function fillInInfoPage(placeTitle, energyType, energyData) {
     document.getElementById("placetitle").innerHTML = placeTitle;
@@ -75,4 +64,12 @@ function fillInInfoPage(placeTitle, energyType, energyData) {
     $("#satellitepic").attr("src", url);
     document.getElementById("potentialenergyyearly").innerHTML = numberWithCommas(potentialValue) + " kWh";
     document.getElementById("datasources").innerHTML = dataSource;
+}
+
+function barrelsOfOilConv(kiloWatts){
+    return parseInt(kiloWatts/1628);
+}
+
+function numberOfHome(kiloWatts){
+    return parseInt(kiloWatts/3600);
 }
