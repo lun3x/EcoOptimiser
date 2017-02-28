@@ -46,23 +46,19 @@ function fillInInfoPage(placeTitle, energyType, energyData) {
                     break;
             }
             url += energyData[1] + "," + energyData[2];
-            dataSource += "<br> Information on viability of wind farms: http://windeis.anl.gov/guide/basics/ <br> Wind speed data: http://www.rensmart.com/Weather/WindArchive#monthlyLayer";
             break;
         case "tidal":
             potentialValue = tidalPower(energyData[3]);
             url += energyData[1] + "," + energyData[2];
-            dataSource += "<br> Tidal height difference data: https://www.bodc.ac.uk/data/hosted_data_systems/sea_level/uk_tide_gauge_network/processed/";
             break;
         case "hydro":
             potentialValue = hydroPower(energyData[6]);
             url += energyData[9] + "," + energyData[10];
-            dataSource += "<br> Daily gauge flow river data: ";
             break;
     }
     
     $("#satellitepic").attr("src", url);
     document.getElementById("potentialenergyyearly").innerHTML = numberWithCommas(potentialValue) + " kWh";
-    document.getElementById("datasources").innerHTML = dataSource;
     document.getElementById("energyInHouses").innerHTML = "This would power " + numberWithCommas(numberOfHome(potentialValue)) + " homes every year!";
     document.getElementById("energyInOil").innerHTML = "This is equivalent to " + numberWithCommas(barrelsOfOilConv(potentialValue)) + " barrels of oil every year! This is valued at &pound" + numberWithCommas(valueOfOil(barrelsOfOilConv(potentialValue))) + "!";
 }
