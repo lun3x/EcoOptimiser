@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="width=device-width, initial-scale=1" name="viewport">
+        <link href="https://www.w3schools.com/lib/w3.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="w3-panel">
+            <h3>Wind</h3>
+            <h4>Data Sources</h4>
+            <p>Click <a href="http://windeis.anl.gov/guide/basics/">here</a> to go to the rensmart website, this is where all wind data was collected from for the United Kingdom. <a href="http://www.rensmart.com/Weather/WindArchive#monthlyLayer">Reuk.co.uk</a> was also used to calculate an estimate for the amount of energy produced in a year by an industrial size wind turbine at the location specified. The Wind Energy Development Programmatic was also used to determine the optimal conditions for wind power to produce a sufficient amount of energy.
+            </p>
+            <h4>Calculations</h4>
+            <p>
+            To predict the total amount of energy in a year a single wind turbine at the location specified, the following constants and assumptions were used from national averages:
+            <br>
+            <br>
+            Size: Large (Industrial)<br>
+            Diameter of rotation: 60 metres<br> 
+            Industrial size blade<br>
+            Cut in speed: 5 metres per second<br>
+            Cut out speed: 14 metres per second<br>
+            Cost of Turbine: £2-3.3 million<br>
+            Efficiency: 30%
+            </p>
+            <h3>Hydro</h3>
+            <h4>Data Sources</h4>
+            <p>
+                Click <a href="http://nrfa.ceh.ac.uk/data/search">here</a> to go to the National River Flow Archive (NRFA) website, this is where all river flow data was collected from for the United Kingdom. The longitude and latitude of the locations are not available therefor the grid reference variable for each record were used to calculate the longitude and latitude. The NRFA website also sourced the method for determining whether a river was viable for a hydroelectric dam to be constructed upon it. <a href="http://www.reuk.co.uk/wordpress/hydro/calculation-of-hydro-power">Reuk.co.uk</a> provided a formula to estimate the total energy produced in a year by a hydroelectric dam on a river at the specified location.
+            </p>
+            <h4>Calculations</h4>
+            <p>
+            To predict the total amount of energy in a year a hydroelectric dam could produce at the location specified, the following constants and assumptions were used from national averages:
+            <br><br>
+            Energy Per Year (KWh) = E * R * H * g * 60 * 60 * 24 * 365
+            <br><br>    
+            E = Efficiency = 80%<br>
+            R = River Flow<br>
+            H = Falling Height = 50m<br>
+            g = Accelration Due to Gravity = 9.81 m/s^2<br>
+            <br>
+            </p>
+            <h3>Tidal</h3>
+            <h4>Data Sources</h4>
+            <p>
+            Click <a href="http://www.ceda.ac.uk">here</a> to go to the Centre of Environmental Data Analysis (CEDA), this is where all tidal data was collected from for the United Kingdom. You cannot view the data used unless you request access from CEDA for specific data. <a href="https://en.wikipedia.org/wiki/Tidal_barrage">Wikipedia</a> has a very descriptive and technical article on how to harness tidal power, it also provides the a formula to estimate the amount of energy produced by a tidal barrage. 
+            </p>
+            <h4>Calculations</h4>
+            <p>
+            To predict the total amount of energy in a year a tidal barrage could produce at the location specified, the following constants and assumptions were used from national averages:
+            <br><br>
+            Energy Per Year (KWh) = 0.5 * A * p * g * h^2 * E
+            <br><br>
+            A =  Horizontal area of basin =  1000m^2<br>
+            p = Density of sea water = 1025 kg/m^3<br>
+            g = Acceleration due to gravity = 9.81 m/s^2<br>
+            h = Vertical tidal range<br>
+            E = Efficiency<br>
+            <br>
+            </p>
+        </div>
+    </body>
+</html>

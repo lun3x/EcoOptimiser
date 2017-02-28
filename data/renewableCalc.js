@@ -1,21 +1,14 @@
 "use strict"
 
-
-//Predicted turbine outputs:
-// Scilly: 2,945,327 kWh
-// Tiree: 2,567,033 kWh
-// Shetland Islands: 2,427,124 kWh
-
-
 function hydroPower(volumeFlow){
     var efficiency = 0.9;
     var density = 1000;
     var fallingHeight = 50;
     var gravAccel = 9.81;
     
-    var kiloWatts = efficiency * density * fallingHeight * gravAccel * 60 * 60;
+    var kiloWatts = efficiency * volumeFlow * fallingHeight * gravAccel * 60 * 60 * 24 * 365;
     
-    return Math.floor(kiloWatts / 1000);
+    return Math.floor(kiloWatts);
 }
 
 function tidalPower(tideChange){
@@ -23,19 +16,14 @@ function tidalPower(tideChange){
     var barrageBasin = 1000;
     var densitySW = 1025;
     var efficiency = 0.8;
+    var  kiloWatts = barrageBasin * densitySW * gravAccel * tideChange * tideChange * efficiency * 365;
     
-    var kiloWatts = 0.5 * barrageBasin * gravAccel * densitySW * tideChange * tideChange * 86400 * 2 * efficiency;
-    
-    return Math.floor(kiloWatts / 1000); 
+    return Math.floor(kiloWatts); 
 }
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-
-// Scilly: 2,945,327 kWh
-// Tiree: 2,567,033 kWh
-// Shetland Islands: 2,427,124 kWh
 
 function fillInInfoPage(placeTitle, energyType, energyData) {
     console.log(placeTitle);
@@ -49,13 +37,13 @@ function fillInInfoPage(placeTitle, energyType, energyData) {
         case "wind":
             switch (placeTitle) {
                 case "Scilly":
-                    potentialValue = "2,945,327";
+                    potentialValue = "2945327";
                     break;
                 case "Tiree":
-                    potentialValue = "2,567,033";
+                    potentialValue = "2567033";
                     break;
                 case "Shetland Island":
-                    potentialValue = "2,427,124";
+                    potentialValue = "2427124";
                     break;
             }
             url += energyData[1] + "," + energyData[2];
@@ -76,4 +64,18 @@ function fillInInfoPage(placeTitle, energyType, energyData) {
     $("#satellitepic").attr("src", url);
     document.getElementById("potentialenergyyearly").innerHTML = numberWithCommas(potentialValue) + " kWh";
     document.getElementById("datasources").innerHTML = dataSource;
+    document.getElementById("energyInHouses").innerHTML = "This would power " + numberWithCommas(numberOfHome(potentialValue)) + " homes every year!";
+    document.getElementById("energyInOil").innerHTML = "This is equivalent to " + numberWithCommas(barrelsOfOilConv(potentialValue)) + " barrels of oil every year! This is valued at &pound" + numberWithCommas(valueOfOil(barrelsOfOilConv(potentialValue))) + "!";
+}
+
+function barrelsOfOilConv(kiloWatts){
+    return parseInt(kiloWatts/1628);
+}
+
+function numberOfHome(kiloWatts){
+    return parseInt(kiloWatts/3600);
+}
+
+function valueOfOil(barrels){
+    return parseInt(barrels*53.92*0.8);
 }

@@ -19,11 +19,10 @@
             height: 75%;
         }
         #page1 {
-            height: 100vh;
+            height: 150vh;
         }
-        #page2 {
+        page2 {
             height: 100vh;
-            padding: 5vh;
         }
         #placetitle {
             text-align: center;
@@ -36,11 +35,6 @@
             padding: 20px; 
             width: 400px;
             height: 90px;
-            display: inline-block;
-        }
-        #potentialenergytext {
-            font-size: large;
-            padding: 20px;
             display: inline-block;
         }
         #satellitepic {
@@ -69,11 +63,17 @@
     </head>
     
     <body>
-        
+        <header>
             <div class="w3-panel">
                 <img id="logoimg" src="images/logo.png">
                 <h2 id="motto">Finding the optimal locations for renewable energy</h2>
             </div>
+            <div class="w3-bar w3-green">
+                <a class="w3-bar-item w3-button" onclick="loadMaps()">Map</a>
+                <a class="w3-bar-item w3-button" onclick="loadJustification()">Justification</a>
+            </div>
+        </header>
+        
         <div class="w3-panel" id="page1">
             <div class="w3-cell-row" id="mapandbest">
                 <div class="w3-cell w3-panel w3-border" id="map"></div>
@@ -125,20 +125,84 @@
                 </div>
             </div>
         </div>
-        <div id="spacer" class="w3-panel"></div>
-        <div class="w3-panel" id="page2">
+        <div class="w3-container" id="page2">
             <h1 id="placetitle"></h1>
-            <p id="potentialenergyyearly"></p>
-            <p id="potentialenergytext"></p>
-            <br>
+            <table class="w3-table">
+                <tr>
+                    <td width="33%"><p id="potentialenergyyearly"></p></td>
+                    <td width="66%"><p id="potentialenergytext" style="padding-top: 8vh"></p></td>
+                </tr>
+                <tr>
+                    <td><img id="houseIcon" src="images/house.jpg" style="height: 25vh"></td>
+                    <td><p id="energyInHouses" style="padding-top: 12vh"></p></td>
+                </tr>
+                <tr>
+                    <td><img id="oilIcon" src="images/oil.jpg"></td>
+                    <td><p id="energyInOil" style="padding-top: 9vh"></p></td>
+                </tr>
+            </table>
             <div class="w3-cell-row">
                 <div class="w3-cell>">
-                    <img id="satellitepic" class="w3-image">
+                    <img id="satellitepic" class="w3-image w3-panel">
                 </div>
                 <div class="w3-cell">
-                    <p id="datasources">Source 1 - Times <br> Source 2 - Daily Mail</p>
+                    <p id="datasources"></p>
                 </div>
             </div>
+        </div>
+        <div class="w3-panel" style="display:none" id="justification">
+            <h3>Wind</h3>
+            <h4>Data Sources</h4>
+            <p>Click <a href="http://windeis.anl.gov/guide/basics/">here</a> to go to the rensmart website, this is where all wind data was collected from for the United Kingdom. <a href="http://www.rensmart.com/Weather/WindArchive#monthlyLayer">Reuk.co.uk</a> was also used to calculate an estimate for the amount of energy produced in a year by an industrial size wind turbine at the location specified. The Wind Energy Development Programmatic was also used to determine the optimal conditions for wind power to produce a sufficient amount of energy.
+            </p>
+            <h4>Calculations</h4>
+            <p>
+            To predict the total amount of energy in a year a single wind turbine at the location specified, the following constants and assumptions were used from national averages:
+            <br>
+            <br>
+            Size: Large (Industrial)<br>
+            Diameter of rotation: 60 metres<br> 
+            Industrial size blade<br>
+            Cut in speed: 5 metres per second<br>
+            Cut out speed: 14 metres per second<br>
+            Cost of Turbine: £2-3.3 million<br>
+            Efficiency: 30%
+            </p>
+            <h3>Hydro</h3>
+            <h4>Data Sources</h4>
+            <p>
+                Click <a href="http://nrfa.ceh.ac.uk/data/search">here</a> to go to the National River Flow Archive (NRFA) website, this is where all river flow data was collected from for the United Kingdom. The longitude and latitude of the locations are not available therefor the grid reference variable for each record were used to calculate the longitude and latitude. The NRFA website also sourced the method for determining whether a river was viable for a hydroelectric dam to be constructed upon it. <a href="http://www.reuk.co.uk/wordpress/hydro/calculation-of-hydro-power">Reuk.co.uk</a> provided a formula to estimate the total energy produced in a year by a hydroelectric dam on a river at the specified location.
+            </p>
+            <h4>Calculations</h4>
+            <p>
+            To predict the total amount of energy in a year a hydroelectric dam could produce at the location specified, the following constants and assumptions were used from national averages:
+            <br><br>
+            Energy Per Year (KWh) = E * R * H * g * 60 * 60 * 24 * 365
+            <br><br>    
+            E = Efficiency = 80%<br>
+            R = River Flow<br>
+            H = Falling Height = 50m<br>
+            g = Accelration Due to Gravity = 9.81 m/s^2<br>
+            <br>
+            </p>
+            <h3>Tidal</h3>
+            <h4>Data Sources</h4>
+            <p>
+            Click <a href="http://www.ceda.ac.uk">here</a> to go to the Centre of Environmental Data Analysis (CEDA), this is where all tidal data was collected from for the United Kingdom. You cannot view the data used unless you request access from CEDA for specific data. <a href="https://en.wikipedia.org/wiki/Tidal_barrage">Wikipedia</a> has a very descriptive and technical article on how to harness tidal power, it also provides the a formula to estimate the amount of energy produced by a tidal barrage. 
+            </p>
+            <h4>Calculations</h4>
+            <p>
+            To predict the total amount of energy in a year a tidal barrage could produce at the location specified, the following constants and assumptions were used from national averages:
+            <br><br>
+            Energy Per Year (KWh) = 0.5 * A * p * g * h^2 * E
+            <br><br>
+            A =  Horizontal area of basin =  1000m^2<br>
+            p = Density of sea water = 1025 kg/m^3<br>
+            g = Acceleration due to gravity = 9.81 m/s^2<br>
+            h = Vertical tidal range<br>
+            E = Efficiency<br>
+            <br>
+            </p>
         </div>
         <script>
             var markers = [];
@@ -260,6 +324,16 @@
                 $('html, body').animate({
                         scrollTop: $("#page2").offset().top
                 }, 750);
+            }
+            function loadMaps(){
+                document.getElementById("page1").style.display = "block";
+                document.getElementById("page2").style.display = "block";
+                document.getElementById("justification").style.display = "none";
+            }
+            function loadJustification(){
+                document.getElementById("page1").style.display = "none";
+                document.getElementById("page2").style.display = "none";
+                document.getElementById("justification").style.display = "block";
             }
         </script>
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYw6rt-EzukvH3J9ms_Z7uPH9uA-G5TxM&callback=initMap"></script>
