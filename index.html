@@ -222,7 +222,7 @@
                 $(document).ready(function() {
                     $.ajax({
                         type: "GET",
-                        url: "http://localhost:8000/wind/windData.csv",
+                        url: "https://raw.githubusercontent.com/lun3x/EcoOptimiser/master/wind/windData.csv",
                         dataType: "text",
                         success: function(data) {
                             var windData = processData(data);
@@ -233,7 +233,7 @@
                     });
                     $.ajax({
                         type: "GET",
-                        url: "http://localhost:8000/hydro/hydroData.csv",
+                        url: "https://raw.githubusercontent.com/lun3x/EcoOptimiser/master/hydro/hydroData.csv",
                         dataType: "text",
                         success: function(data) {
                             var hydroData = processData(data);
@@ -244,7 +244,7 @@
                     });
                     $.ajax({
                         type: "GET",
-                        url: "http://localhost:8000/tidal/tideData.csv",
+                        url: "https://raw.githubusercontent.com/lun3x/EcoOptimiser/master/tidal/tideData.csv",
                         dataType: "text",
                         success: function(data) {
                             var tideData = processData(data);
@@ -255,7 +255,7 @@
                     });
                     $.ajax({
                         type: "GET",
-                        url: "http://localhost:8000/wind/windLocs.csv",
+                        url: "https://raw.githubusercontent.com/lun3x/EcoOptimiser/master/wind/windLocs.csv",
                         dataType: "text",
                         success: function(data) {
                             var windFarmData = processData(data);
