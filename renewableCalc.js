@@ -40,6 +40,7 @@ function numberWithCommas(x) {
 function fillInInfoPage(placeTitle, energyType, energyData) {
     document.getElementById("placetitle").innerHTML = placeTitle;
     document.getElementById("potentialenergytext").innerHTML = "of " + energyType + " energy could potentially be produced per year!";
+    var dataSource = "Data sources: ";
     var potentialValue;
     var url = "https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyArmSsMW1jE6PGnwFVljdROcq7LIejxGMw&size=900x300&maptype=hybrid&zoom=12&scale=2&center=";
     
@@ -57,6 +58,7 @@ function fillInInfoPage(placeTitle, energyType, energyData) {
                     break;
             }
             url = url + energyData[1] + "," + energyData[2];
+            dataSource += "Information on viability of wind farms: http://windeis.anl.gov/guide/basics/ \n Data for wind "
             break;
         case "tidal":
             potentialValue = tidalPower(energyData[3]);
