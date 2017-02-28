@@ -39,19 +39,21 @@ function initHydroPower(map, hydroData){
             title: upperQuartile[i][2]
         });
         
-        addPlaceToMarker(marker, upperQuartile[i]);
+        addHydroPlaceToMarker(marker, upperQuartile[i]);
         
         hydroMarkers.push(marker);
     }
     return hydroMarkers;
 }
 
-function addPlaceToMarker(marker, place) {
+function addHydroPlaceToMarker(marker, place) {
     marker.addListener('click', function() {
-        console.log(marker.title);
-        fillInInfoPage(marker.title, "hydro", place);
+        fillInInfoPage(place[2], "hydro", place);
         
         document.getElementById('page2').style.display = "block";
+        
+        document.getElementById("placetitle").className = "w3-blue";
+        document.getElementById("potentialenergyyearly").className = "w3-blue";
 
         $('html, body').animate({
                 scrollTop: $("#page2").offset().top

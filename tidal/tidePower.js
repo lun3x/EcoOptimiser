@@ -29,19 +29,22 @@ function initTidalPower(map, tideData) {
             title: viables[i][0],
         });
 
-        addPlaceToMarker(marker, viables[i]);
+        addTidalPlaceToMarker(marker, viables[i]);
 
         tidalMarkers.push(marker);
     }
     return tidalMarkers;
 }
 
-function addPlaceToMarker(marker, place) {
+function addTidalPlaceToMarker(marker, place) {
     marker.addListener('click', function() {
         fillInInfoPage(place[0], "tidal", place);
         
         document.getElementById('page2').style.display = "block";
 
+        document.getElementById("placetitle").className = "w3-grey";
+        document.getElementById("potentialenergyyearly").className = "w3-grey";
+        
         $('html, body').animate({
                 scrollTop: $("#page2").offset().top
         }, 750);
