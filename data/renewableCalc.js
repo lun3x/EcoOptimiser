@@ -47,17 +47,17 @@ function fillInInfoPage(placeTitle, energyType, energyData) {
                     break;
             }
             url += energyData[1] + "," + energyData[2];
-            dataSource += "Information on viability of wind farms: http://windeis.anl.gov/guide/basics/ | Wind speed data: http://www.rensmart.com/Weather/WindArchive#monthlyLayer";
+            dataSource += "<br> Information on viability of wind farms: http://windeis.anl.gov/guide/basics/ <br> Wind speed data: http://www.rensmart.com/Weather/WindArchive#monthlyLayer";
             break;
         case "tidal":
             potentialValue = tidalPower(energyData[3]);
             url += energyData[1] + "," + energyData[2];
-            dataSource += "Tidal height difference data: https://www.bodc.ac.uk/data/hosted_data_systems/sea_level/uk_tide_gauge_network/processed/";
+            dataSource += "<br> Tidal height difference data: https://www.bodc.ac.uk/data/hosted_data_systems/sea_level/uk_tide_gauge_network/processed/";
             break;
         case "hydro":
             potentialValue = hydroPower(energyData[6]);
             url += energyData[9] + "," + energyData[10];
-            dataSource += "Daily gauge flow river data: ";
+            dataSource += "<br> Daily gauge flow river data: ";
             break;
     }
     
