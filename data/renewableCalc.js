@@ -16,8 +16,6 @@ function tidalPower(tideChange){
     var barrageBasin = 1000;
     var densitySW = 1025;
     var efficiency = 0.8;
-    alert(tideChange);
-    
     var  kiloWatts = barrageBasin * densitySW * gravAccel * tideChange * tideChange * efficiency * 365;
     
     return Math.floor(kiloWatts); 
@@ -65,6 +63,8 @@ function fillInInfoPage(placeTitle, energyType, energyData) {
     $("#satellitepic").attr("src", url);
     document.getElementById("potentialenergyyearly").innerHTML = numberWithCommas(potentialValue) + " kWh";
     document.getElementById("datasources").innerHTML = dataSource;
+    document.getElementById("energyInHouses").innerHTML = "This would power " + numberWithCommas(numberOfHome(potentialValue)) + " homes every year!";
+    document.getElementById("energyInOil").innerHTML = "This is equivalent to " + numberWithCommas(barrelsOfOilConv(potentialValue)) + " barrels of oil every year! This is valued at &pound" + numberWithCommas(valueOfOil(barrelsOfOilConv(potentialValue))) + "!";
 }
 
 function barrelsOfOilConv(kiloWatts){
@@ -73,4 +73,8 @@ function barrelsOfOilConv(kiloWatts){
 
 function numberOfHome(kiloWatts){
     return parseInt(kiloWatts/3600);
+}
+
+function valueOfOil(barrels){
+    return parseInt(barrels*53.92*0.8);
 }

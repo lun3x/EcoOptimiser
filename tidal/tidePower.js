@@ -36,10 +36,10 @@ function getBestTidalLocations(tideData) {
         return 0;
     });
     
-    var locData = tideData.slice(0,3);
+    var locData = tideData.reverse().slice(0,3);
     
     for (var i = 1; i < 4; i++) {
         document.getElementById("tidalLoc" + i).innerHTML = locData[i-1][0];
     }
-    return tideData.slice(0, 3);
+    return tideData.reverse().slice(0, 3);
 }

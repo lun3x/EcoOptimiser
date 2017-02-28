@@ -19,11 +19,10 @@
             height: 75%;
         }
         #page1 {
-            height: 100vh;
+            height: 150vh;
         }
-        #page2 {
+        page2 {
             height: 100vh;
-            padding: 5vh;
         }
         #placetitle {
             text-align: center;
@@ -36,11 +35,6 @@
             padding: 20px; 
             width: 400px;
             height: 90px;
-            display: inline-block;
-        }
-        #potentialenergytext {
-            font-size: large;
-            padding: 20px;
             display: inline-block;
         }
         #satellitepic {
@@ -69,11 +63,17 @@
     </head>
     
     <body>
-        
+        <header>
             <div class="w3-panel">
                 <img id="logoimg" src="images/logo.png">
                 <h2 id="motto">Finding the optimal locations for renewable energy</h2>
             </div>
+            <div class="w3-bar w3-green">
+                <a class="w3-bar-item w3-button" onclick="loadMaps()">Map</a>
+                <a class="w3-bar-item w3-button" onclick="loadJustification()">Justification</a>
+            </div>
+        </header>
+        
         <div class="w3-panel" id="page1">
             <div class="w3-cell-row" id="mapandbest">
                 <div class="w3-cell w3-panel w3-border" id="map"></div>
@@ -125,25 +125,22 @@
                 </div>
             </div>
         </div>
-        <div id="spacer" class="w3-panel"></div>
-        <div class="w3-panel" id="page2">
+        <div class="w3-container" id="page2">
             <h1 id="placetitle"></h1>
-            <div class="w3-cell-row">
-                <div class="w3-cell">
-                    <p id="potentialenergyyearly"></p>
-                </div>
-                <div class="w3-cell">
-                    <p id="potentialenergytext"></p>
-                </div>
-            </div>
-            <div class="w3-cell-row">
-                <div class="w3-cell">
-                    <img id="houseIcon" src="images/house.jpg" style="height: 30vh">
-                </div>
-                <div class="w3-cell w3-panel">
-                    <p id="energyInHouses" style="padding-top: 13vh">This could power 500 houses for a year</p>   
-                </div>
-            </div>
+            <table class="w3-table">
+                <tr>
+                    <td width="33%"><p id="potentialenergyyearly"></p></td>
+                    <td width="66%"><p id="potentialenergytext" style="padding-top: 8vh"></p></td>
+                </tr>
+                <tr>
+                    <td><img id="houseIcon" src="images/house.jpg" style="height: 25vh"></td>
+                    <td><p id="energyInHouses" style="padding-top: 12vh"></p></td>
+                </tr>
+                <tr>
+                    <td><img id="oilIcon" src="images/oil.jpg"></td>
+                    <td><p id="energyInOil" style="padding-top: 9vh"></p></td>
+                </tr>
+            </table>
             <div class="w3-cell-row">
                 <div class="w3-cell>">
                     <img id="satellitepic" class="w3-image w3-panel">
@@ -153,6 +150,7 @@
                 </div>
             </div>
         </div>
+        <div class="w3-panel" style="display:none">TESTETSTETSTSTT</div>
         <script>
             var markers = [];
             var buttonStatus = [0,0,0]
