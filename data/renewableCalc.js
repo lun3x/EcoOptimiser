@@ -6,7 +6,7 @@ function hydroPower(volumeFlow){
     var fallingHeight = 50;
     var gravAccel = 9.81;
     
-    var kiloWatts = efficiency * volumeFlow * fallingHeight * gravAccel * 60 * 60 * 24 * 365;
+    var kiloWatts = efficiency * volumeFlow * fallingHeight * gravAccel * 24 * 365;
     
     return Math.floor(kiloWatts);
 }
@@ -16,7 +16,7 @@ function tidalPower(tideChange){
     var barrageBasin = 1000;
     var densitySW = 1025;
     var efficiency = 0.8;
-    var  kiloWatts = barrageBasin * densitySW * gravAccel * tideChange * tideChange * efficiency * 365;
+    var  kiloWatts = barrageBasin * densitySW * gravAccel * tideChange * tideChange * efficiency * 365 / 60 * 60;
     
     return Math.floor(kiloWatts); 
 }
@@ -69,7 +69,7 @@ function barrelsOfOilConv(kiloWatts){
 }
 
 function numberOfHome(kiloWatts){
-    return parseInt(kiloWatts/3600);
+    return parseInt(kiloWatts/4668);
 }
 
 function valueOfOil(barrels){
