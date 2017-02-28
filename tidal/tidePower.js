@@ -16,7 +16,8 @@ function initTidalPower(map, tideData) {
                     fillColor: 'grey',
                     fillOpacity: 0.6,
                     strokeWeight: 1,
-                }
+                },
+                title: tideData[i][0],
             });
             tidalMarkers.push(marker);
         }

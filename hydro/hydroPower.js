@@ -35,7 +35,8 @@ function initHydroPower(map, hydroData){
                 fillColor: 'blue',
                 fillOpacity: 0.6,
                 strokeWeight: 1,
-            }
+            },
+            title: upperQuartile[i][2]
         });
         hydroMarkers.push(marker);
     }

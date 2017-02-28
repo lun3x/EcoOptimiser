@@ -3,7 +3,7 @@
 function initWindPower(map, windData) {
     var windMarkers = [];
     for (var i = 0; i < windData.length; i++) { 
-        if (parseFloat(windData[i][15]) > 5.7) {
+        if (parseFloat(windData[i][15]) > 0) {
             var positionM = {lat: parseFloat(windData[i][1]), lng: parseFloat(windData[i][2])};
             var marker = new google.maps.Marker({
                 position: positionM,
@@ -21,6 +21,27 @@ function initWindPower(map, windData) {
         }
     }
     return windMarkers;
+}
+
+function initWindFarms(map, windFarmData) {
+    var windFarmMarkers = [];
+    for (var i = 0; i < windFarmData.length; i++) {
+        var positionM = {lat: parseFloat(windFarmData[i][3]), lng: parseFloat(windFarmData[i][4])};
+        var marker = new google.maps.Marker({
+            position: positionM,
+            map: map,
+            icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: 2,
+                fillColor: 'green',
+                fillOpacity: 1,
+                strokeWeight: 0,
+            },
+            title: windFarmData[i][0],
+        });
+        windFarmMarkers.push(marker);
+    }
+    return windFarmMarkers;
 }
 
 function getBestWindLocations(windData) {

@@ -15,7 +15,7 @@ function hydroPower(volumeFlow){
     
     var kiloWatts = efficiency * density * fallingHeight * gravAccel * 60 * 60;
     
-    return kiloWatts;
+    return Math.floor(kiloWatts);
 }
 
 function tidalPower(tideChange){
@@ -26,7 +26,11 @@ function tidalPower(tideChange){
     
     var kiloWatts = 0.5 * barrageBasin * gravAccel * densitySW * tideChange * tideChange * 86400 * 2 * efficiency;
     
-    return kiloWatts; 
+    return Math.floor(kiloWatts); 
+}
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 // Scilly: 2,945,327 kWh
@@ -60,5 +64,5 @@ function fillInInfoPage(placeTitle, energyType, energyData) {
             break;
     }
     
-    document.getElementById("potentialenergyyearly").innerHTML = potentialValue + "kWh";
+    document.getElementById("potentialenergyyearly").innerHTML = numberWithCommas(potentialValue) + " kWh";
 }
