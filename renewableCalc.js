@@ -28,3 +28,37 @@ function tidalPower(tideChange){
     
     return kiloWatts; 
 }
+
+// Scilly: 2,945,327 kWh
+// Tiree: 2,567,033 kWh
+// Shetland Islands: 2,427,124 kWh
+
+function fillInInfoPage(placeTitle, energyType, energyData) {
+    document.getElementById("placetitle").innerHTML = placeTitle;
+    document.getElementById("energytype").innerHTML = energyType;
+    var potentialValue;
+    
+    switch (energyType) {
+        case "wind":
+            switch (placeTitle) {
+                case "Scilly":
+                    potentialValue = "2,945,327";
+                    break;
+                case "Tiree":
+                    potentialValue = "2,567,033";
+                    break;
+                case "Shetland Island":
+                    potentialValue = "2,427,124";
+                    break;
+            }
+            break;
+        case "tidal":
+            potentialValue = tidalPower(energyData[3]);
+            break;
+        case "hydro":
+            potentialValue = hydroPower(energyData[6]);
+            break;
+    }
+    
+    document.getElementById("potentialenergyyearly").innerHTML = potentialValue + "kWh";
+}
